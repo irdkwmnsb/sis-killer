@@ -65,7 +65,7 @@ def main():
                 )
             )
         f.write(TEMPLATE_TAIL)
-    print("Done!")
+    print("Done! Result in", result_html)
     pass
 
 
