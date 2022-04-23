@@ -12,9 +12,8 @@ ROW = '''
 {imgs}
 </div>'''
 
-NEGATIVE_PADDING = "40px"
-N_IN_ROW = 4
-N_IN_COLUMN = 5
+N_IN_ROW = 5
+N_IN_COLUMN = 6
 
 
 def get_img(src, name):
@@ -29,7 +28,6 @@ def read_template():
     with open("template.html", "r") as f:
         template = f.read()
         template = template\
-            .replace("{{NEGATIVE_PADDING}}", NEGATIVE_PADDING)\
             .replace("{{N_IN_ROW}}", str(N_IN_ROW)) \
             .replace("{{N_IN_COLUMN}}", str(N_IN_COLUMN))
         split = template.split("{{IMAGES}}")
