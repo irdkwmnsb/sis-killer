@@ -4,6 +4,7 @@ IMG = '''
 <img src="{src}"/>
 </div>
 <div class="title">{name}</div>
+<div class="extra">{extra}</div>
 </div>
 '''
 
@@ -16,8 +17,8 @@ N_IN_ROW = 5
 N_IN_COLUMN = 6
 
 
-def get_img(src, name):
-    return IMG.format(src=src, name=name)
+def get_img(src, name, extra):
+    return IMG.format(src=src, name=name, extra=extra or "")
 
 
 def get_row(imgs):
@@ -50,6 +51,13 @@ def main():
     if (input("Continue? [Y/n] ") or "y").lower() != "y":
         print("Aborting")
         return
+    extras = {}
+    if (dir / "extra.csv").exists():
+        print("Using extras")
+        with open(dir / "extra.csv") as f:
+            for line in f:
+                name, extra = line.split(", ")
+                extras[name.strip()] = extra.strip()
     files = list(dir.rglob("*.png"))
     result_html = dir / "result.html"
     with open(result_html, "w") as f:
@@ -58,7 +66,8 @@ def main():
             f.write(
                 get_row(
                     get_img(src=file.relative_to(result_html.parent),
-                            name=file.stem)
+                            name=file.stem.strip(),
+                            extra=extras.get(file.stem.strip()))
                     for file in files[i:i + N_IN_ROW]
                 )
             )
