@@ -1,10 +1,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
+        * {
+            -webkit-print-color-adjust: exact;
+        }
+        html {
+            font-size: 10pt;
+        }
         body {
             margin: 0;
-            font-family: sans-serif;
+            font-family: 'Playfair Display', serif;
         }
         *::-webkit-scrollbar {
             display: none;
@@ -20,49 +29,63 @@
             height: calc(100vh / {{N_IN_COLUMN}});
             page-break-inside: avoid;
         }
-        .pic {
+        .card {
             flex-basis: 100%;
             flex-grow: 0;
             height: 100%;
             overflow: hidden;
-            padding: 5mm;
             box-sizing: border-box;
-            border: 1px black solid;
+            border: 0.5pt black solid;
             display: flex;
             flex-direction: column;
             position: relative;
         }
-        .pic .imgcontainer {
-            flex-shrink: 1;
-            overflow: hidden;
+        .cardRow {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 3pt;
+            padding-left: 2pt;
+            padding-right: 2pt;
         }
-        .pic .imgcontainer img {
-            object-fit: contain;
+        .name {
+            flex-grow: 1;
+        }
+        .card .killer {
+            padding-top: 2pt;
+            font-weight: lighter;
+        }
+        .card .yourTarget {
+            flex-grow: 1;
+            align-items: start;
+        }
+        .card .target {
+            font-size: 1.2rem;
+            font-weight: bolder;
+            padding-bottom: 2pt;
+            background-color: rgba(175,175,175,0.51);
+            color: #660000;
+        }
+        .card .bg {
             width: 100%;
             height: 100%;
-            flex: 1 1 auto;
-        }
-        .pic .title {
-            text-align: center;
-            font-size: 11pt;
-            flex: 0 0 2rem;
-        }
-        .pic .extra {
             position: absolute;
-            top: 1mm;
-            left: 0;
-            padding: 0 5mm;
-            width: 100%;
-            box-sizing: border-box;
-            text-align: center;
-            color: #afafaf;
+            z-index: -1;
+            background-color: {{COLOR}};
+            opacity: 30%;
+            -webkit-mask-image: url("../bg-01.svg");
+            mask-image: url("../bg-01.svg");
+            -webkit-mask-position: bottom right;
+            mask-position: bottom right;
+            -webkit-mask-size: cover;
+            mask-size: cover;
         }
     </style>
     <title>Пропуски</title>
 </head>
 <body>
-<div class="pics">
-    {{IMAGES}}
+<div class="cards">
+    {{CARDS}}
 </div>
 </body>
 </html>
